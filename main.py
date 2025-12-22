@@ -19,7 +19,55 @@ def lorenzsystem(state):
     
     return np.array([x_dot, y_dot, z_dot])
 
+def rungekutta4(state, h):
+    k_1 = lorenzsystem(state)
+    k_2 = lorenzsystem(state + k_1 * h/2)
+    k_3 = lorenzsystem(state + k_2 * h/2)
+    k_4 = lorenzsystem(state + k_3 * h)
 
+    new_state = state + h/6 * (k_1 + 2*k_2 + 2*k_3 + k_4)
+
+    return new_state
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 def simplefunction(x, y):
     z = ((x+1) + np.sin(y))
@@ -37,9 +85,4 @@ ax.plot_surface(X, Y, Z, cmap='viridis')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
-plt.show()
-
-dx, dy, dz = lorenzsystem(state)
-print(dx, dy, dz)
-        
-
+plt.show()"""
