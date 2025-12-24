@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
+numsteps = 10000
 rho = 28
 sigma = 10
 beta = 8/3
-dt = 0.01
+h = 0.01
 state = np.array([0.0, 1, -1])
 
 
@@ -30,12 +31,33 @@ def rungekutta4(state, h):
     return new_state
 
 
+traj = np.zeros([numsteps, 3])
+traj[0] = state 
 
 
+#not iterable 
+for i in range(1, numsteps):
+    traj[i] = rungekutta4(traj[i-1],h)
 
+#next steps are to add time step for loop, so far, rk4 method needs to be validated and tested against true lorenzsystem trajectory
+x_plt = traj[:,0]
+y_plt = traj[:,1]
+z_plt = traj[:,2]
 
+fig1 = plt.figure(figsize=(10,7))
+ax = fig1.add_subplot(111, projection='3d')
 
+ax.plot(x_plt, y_plt, z_plt)
+plt.show()
 
+time = np.arange(numsteps) * h
+
+fig2, axes = plt.subplots(3, 1, figsize=(10,9))
+
+axes[0].plot(time, x_plt, color='red')
+axes[1].plot(time, y_plt, color='green')
+axes[2].plot(time, z_plt, color='blue')
+plt.show()
 
 
 
